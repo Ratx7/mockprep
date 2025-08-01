@@ -9,8 +9,10 @@ import { columns, } from "../components/columns";
 import { EmptyState } from "@/components/empty-state";
 import { useAgentsFilters } from "../../hooks/use-agents-filters";
 import { DataPagination } from "../components/data-pagination";
+import { useRouter } from "next/navigation";
 
 export const AgentsView = () => {
+    const router = useRouter();
     const [filters, setFilters] = useAgentsFilters();
 
     const trpc = useTRPC();
@@ -21,7 +23,11 @@ export const AgentsView = () => {
     return (
         <div className="flex-1 pb-4 px-4  md:px-8 flex flex-col gap-y-4">
             {/* {JSON.stringify(data, null, 2)} */}
-            <DataTable data={data.items} columns={columns}/>
+            <DataTable
+            data={data.items}
+            columns={columns}
+            onRowClick={(row) => router.push(`/agents/${row.id}`)}
+            />
             <DataPagination
                 page={filters.page}
                 totalPages={data.totalPages}
@@ -41,7 +47,7 @@ export const AgentsViewLoading = () => {
     return (
         <LoadingState
             title="Loading Agents"
-            description="Please wait while we fetch the agents data."
+            description="Please wait while we fetch the agents data"
         />
     );
 };
@@ -50,7 +56,7 @@ export const AgentsViewError = () => {
     return (
         <ErrorState
             title="Error Loading Agents"
-            description="An error occurred while trying to load the agents. Please try again later."
+            description="An error occurred while trying to load the agents. Please try again later"
         />
     );
 };
