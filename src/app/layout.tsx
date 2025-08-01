@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
+import { TRPCReactProvider } from "@/trpc/client";
+
 const inter = Montserrat({
   subsets: ["latin"],
 });
@@ -17,12 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <TRPCReactProvider>
+      <html lang="en">
+        <body
+          className={`${inter.className} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </TRPCReactProvider>
+
   );
 }
