@@ -9,29 +9,33 @@ import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
 import { UpdateMeetingDialog } from "../components/update-meetings-dialog";
 import { useState } from "react";
+import { UpcomingState } from "../components/upcoming-state";
+import { ActiveState } from "../components/active-state";
+import { CancelledState } from "../components/cancelled-state";
+import { ProcessingState } from "../components/processing-state ";
 
 interface Props {
     meetingId: string;
 };
 
-export const MeetingIdView = ({meetingId}: Props) => {
+export const MeetingIdView = ({ meetingId }: Props) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const router = useRouter();
-    const [ UpdateMeetingDialogOpen, setUpdateMeetingDialogOpen] = useState(false);
+    const [UpdateMeetingDialogOpen, setUpdateMeetingDialogOpen] = useState(false);
 
     const [RemoveConfirmation, confirmRemove] = useConfirm(
         "Are you sure?",
         "The following action will remove this meeting"
     );
 
-    const {data} = useSuspenseQuery(
-        trpc.meetings.getOne.queryOptions({id: meetingId}),
+    const { data } = useSuspenseQuery(
+        trpc.meetings.getOne.queryOptions({ id: meetingId }),
     );
 
     const removeMeeting = useMutation(
         trpc.meetings.remove.mutationOptions({
-            onSuccess:()=> {
+            onSuccess: () => {
                 queryClient.invalidateQueries(trpc.meetings.getMany.queryOptions({}));
                 // TODO: Invalidate free tier usage
                 router.push("/meetings");
@@ -42,10 +46,16 @@ export const MeetingIdView = ({meetingId}: Props) => {
     const handleRemoveMeeting = async () => {
         const ok = await confirmRemove();
 
-        if(!ok) return;
+        if (!ok) return;
 
         await removeMeeting.mutateAsync({ id: meetingId });
     };
+
+    const isActive = data.status === "active";
+    const isUpcoming = data.status === "upcoming";
+    const isCancelled = data.status === "cancelled";
+    const isCompleted = data.status === "completed";
+    const isProcessing = data.status === "processing";
 
     return (
         <>
@@ -62,7 +72,17 @@ export const MeetingIdView = ({meetingId}: Props) => {
                     onEdit={() => setUpdateMeetingDialogOpen(true)}
                     onRemove={handleRemoveMeeting}
                 />
-                {JSON.stringify(data, null, 2)}
+                {isCancelled && <CancelledState/>}
+                {isProcessing && <ProcessingState/>}
+                {isCompleted && <div>Completed</div>}
+                {isActive && <ActiveState meetingId="meetingId"/>}
+                {isUpcoming && (
+                    <UpcomingState
+                        meetingId="meetingId"
+                        onCancelMeeting={() => { }}
+                        isCancelling={false}
+                    />
+                )}
             </div>
         </>
     );
