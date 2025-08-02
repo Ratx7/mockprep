@@ -17,7 +17,7 @@ export const GenerateAvatar = ({ seed, className, variant = "botttsNeutral" }: G
         });
     } else{
         avatar = createAvatar(initials, {
-            seed,
+            seed: seed.charAt(0).toUpperCase(),
             fontWeight: 500,
             fontSize: 42,
         });
