@@ -29,6 +29,8 @@ Example:
 #### Next Section
 - Feature X automatically does Y
 - Mention of integration with Z
+
+#### Note: If no transcript is provide then do not return anything just say thank you for joining the meeting
   `.trim(),
   model: gemini({model:"gemini-2.0-flash", apiKey: process.env.GEMINI_API_KEY }),
 });
