@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BotIcon, VideoIcon, SparklesIcon, ClockIcon, TrendingUpIcon, UsersIcon, ArrowRightIcon, PlayIcon, CheckCircleIcon } from "lucide-react";
+import { BotIcon, VideoIcon, SparklesIcon, TrendingUpIcon, ArrowRightIcon, PlayIcon, CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTRPC } from "@/trpc/client";
