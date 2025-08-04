@@ -12,9 +12,10 @@ import {Alert, AlertTitle} from "@/components/ui/alert";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import Link from "next/link"
 import  { authClient } from "@/lib/auth-client";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {FaGithub, FaGoogle} from "react-icons/fa";
+import Image from "next/image";
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -165,11 +166,9 @@ export const SignUpView = () => {
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button disabled={pending} variant="outline" className="w-full" type="button" onClick={() => onSocial("google")}>
-                                        {/* <img src="/google.svg" alt="Google" className="h-4 w-4 mr-2" /> */}
                                         <FaGoogle />
                                     </Button>
                                     <Button disabled={pending} variant="outline" className="w-full" type="button" onClick={() => onSocial("github")}>
-                                        {/* <img src="/github.svg" alt="GitHub" className="h-4 w-4 mr-2" /> */}
                                         <FaGithub />
                                     </Button>
                                 </div>
@@ -181,8 +180,7 @@ export const SignUpView = () => {
                         </form>
                     </Form>
                     <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]">
-                        </img>
+                        <Image src="/logo.svg" alt="Image" className="h-[92px] w-[92px]"></Image>
                         <p className="text-2xl font-semibold text-white">
                             Mockviews
                         </p>

@@ -13,7 +13,7 @@ export const CallView = ({
     meetingId
 }: Props) => {
     const trpc = useTRPC();
-    const { data, error } = useSuspenseQuery(trpc.meetings.getOne.queryOptions({ id: meetingId }));
+    const { data } = useSuspenseQuery(trpc.meetings.getOne.queryOptions({ id: meetingId }));
 
     if(data.status === "completed") {
         return(

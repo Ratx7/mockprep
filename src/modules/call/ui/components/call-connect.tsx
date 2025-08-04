@@ -1,6 +1,6 @@
 "use client";
 
-import { Call, CallingState, CallState, StreamCall, StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
+import { Call, CallingState, StreamCall, StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTRPC } from "@/trpc/client";
