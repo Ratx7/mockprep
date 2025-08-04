@@ -3,12 +3,10 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { MeetingGetMany } from "../../types"
 import { GenerateAvatar } from "@/components/generate-avatar"
-import { CornerDownRightIcon, VideoIcon, CircleCheckIcon, CircleXIcon, CircleArrowUpIcon, ClockFadingIcon, LoaderIcon, ClockArrowUpIcon } from "lucide-react"
+import { CornerDownRightIcon,  CircleCheckIcon, CircleXIcon,  ClockFadingIcon, LoaderIcon, ClockArrowUpIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns";
 import { cn, formatDuration } from "@/lib/utils"
-
-type Meeting = MeetingGetMany[number];
 
 const statusIconMap = {
     upcoming: ClockArrowUpIcon,

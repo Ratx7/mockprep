@@ -4,7 +4,6 @@ import { useTRPC } from "@/trpc/client";
 import { CommandSelect } from "@/components/command-select";
 import { GenerateAvatar } from "@/components/generate-avatar";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
-import { Divide } from "lucide-react";
 
 export const AgentIdFilter = () => {
     const [ filters, setfilters] = useMeetingsFilters();
